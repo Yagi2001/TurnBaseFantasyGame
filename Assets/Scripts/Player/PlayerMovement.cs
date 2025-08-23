@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (!IsMyTurn()) return;
         _moveInput = Input.GetAxisRaw( "Horizontal" );
         if (CheckIsGrounded() && (Input.GetKeyDown( KeyCode.UpArrow ) || Input.GetKeyDown( KeyCode.Space )))
         {
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!IsMyTurn()) return;
         AdjustAnimation();
         JumpIfNecessary();
         ApplyHorizontalMovement();
@@ -64,5 +66,10 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2( rb.velocity.x, jumpForce );
             _needJump = false;
         }
+    }
+
+    private bool IsMyTurn()
+    {
+        return TurnManager.Instance.GetCurrentPlayableCharacter() == transform;
     }
 }
