@@ -71,5 +71,6 @@ public class TimeManager : MonoBehaviour
             yield return new WaitForSeconds( 1f );
             remainingTime--;
         }
+        EventManager.OnTurnCompleted();
     }
 }
