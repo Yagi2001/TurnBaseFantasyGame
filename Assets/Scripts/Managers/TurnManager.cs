@@ -25,6 +25,11 @@ public class TurnManager : MonoBehaviour
         AdjustPlayableCharacter();
     }
 
+    private void Start()
+    {
+        EventManager.OnGameStarted();
+    }
+
     private void OnDestroy()
     {
         EventManager.TurnCompleted -= OnTurnCompleted;
@@ -51,7 +56,7 @@ public class TurnManager : MonoBehaviour
         _playableCharacter = activeTeams[_currentTeamIndex].characters[indexOfPlayableCharacter];
     }
 
-    private void OnTurnCompleted(TeamColor teamColor)
+    private void OnTurnCompleted()
     {
         activeTeams[_currentTeamIndex].OnTurnComplete();
         _currentTeamIndex++;
@@ -66,7 +71,8 @@ public class TurnManager : MonoBehaviour
     ///TEST Methods
     public void TestTurnComplete()
     {
-        OnTurnCompleted(TeamColor.Blue);
+        OnTurnCompleted();
+        EventManager.OnTurnCompleted();
     }
 }
 

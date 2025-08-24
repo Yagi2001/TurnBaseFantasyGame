@@ -2,10 +2,16 @@ using System;
 
 public static class EventManager
 {
-    public static event Action<TeamColor> TurnCompleted;
+    public static event Action TurnCompleted;
+    public static event Action GameStarted;
 
-    public static void OnTurnCompleted(TeamColor teamColor)
+    public static void OnTurnCompleted()
     {
-        TurnCompleted?.Invoke(teamColor);
+        TurnCompleted?.Invoke();
+    }
+
+    public static void OnGameStarted()
+    {
+        GameStarted?.Invoke();
     }
 }
